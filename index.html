@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>game tembak burung</title>
+  <style type="text/css">
+    body {
+      font-family: sans-sherif;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Game Tembak Burung</h1>
+  <p class>Top Score:<span id="TopSore"></span></p>
+  <p class>Total Waktu:<span id="totaalwaktu"></span></p>
+  <img id="images">
+
+  <script type="text/javascript">
+
+  var counter = 1;
+  var start = "";
+  var end = "";
+  var totalwaktu = "";
+
+    //1.Tampilan gambar burung secara random
+
+    tampilkanGambar();
+    function tampilkanGambar() {
+
+      var top = Math.random() * 400;
+      var left = Math.random() * 400;
+
+      start = new Date().getTime();
+
+      document.getElementById("images").src = "images.jpeg";
+      document.getElementById("images").style.height = 60 + "px";
+      document.getElementById("images").style.width = 60 + "px";
+      document.getElementById("images").style.top = top + "px";
+      document.getElementById("images").style.left = left + "px";
+      document.getElementById("images").style.position = "relative";
+
+      document.getElementById("images").style.display = "block";
+    }
+    //2.Kalau burung di tembak, ganti gambar jadi gambar bom
+
+
+    document.getElementById("images").onclick = function () {
+      document.getElementById("images").src = "index.jpeg";
+      document.getElementById("images").style.height = 120 + "px";
+      document.getElementById("images").style.width = 120 + "px"
+      setTimeout(sembunyikanGambar, 500);
+
+      if (counter < 5) {
+
+      
+      setTimeout(tampilkanGambar, 600);
+    counter++; 
+    } else {
+      alert("selesai");
+      end = new Date().getTime();
+      totalwaktu = (end - start) / 1000;
+      document.getElementById("totalwaktu").innerHTML - 
+      totalwaktu; + "s";
+    }
+
+
+    }
+    function sembunyikanGambar() {
+      document.getElementById("images").style.display = "none";
+    }
+
+    //3.setelah 5 kali terbakar hitung total waktunya
+
+     
+    function setTopscore() {
+      if(localStorage.getItem("TopScore") == null){
+         localStorage.setItem("TopSore",totalwaktu);
+         document.getElementById("TopScore").innerHTML = localStorage.getItem("TopScore")
+      }
+    }
+    //4.set top score
+
+    setTopscore()
+
+  
+  </script>
+
+</body>
+
+</html>
